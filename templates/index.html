@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Words Frequency Analyzer</title>
+    <style>
+        /* Apply a background image of space */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background-image: url('https://wallup.net/wp-content/uploads/2018/09/30/55564-outer-space-planets-earth.jpg'); /* Example space background */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            background-attachment: fixed;
+        }
+
+        /* Form styling */
+        form {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 16px;
+        }
+
+        input[type="text"], input[type="number"], button {
+            font-size: 16px;
+            padding: 8px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+
+        table, th, td {
+            border: 1px solid #fff;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #fff;
+        }
+
+        /* Graph container styling */
+        .graph-container {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Top Words Frequency Analyzer</h1>
+    <form action="/get-top-words" method="POST">
+        <label for="url">Enter URL:</label>
+        <input type="text" id="url" name="url" required placeholder="e.g., https://example.com">
+        <br><br>
+        <label for="n">Number of Top Words:</label>
+        <input type="number" id="n" name="n" required min="1">
+        <br><br>
+        <button type="submit">Analyze</button>
+    </form>
+
+    <!-- Display an error message if there is one -->
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <!-- Display the table of top words and frequencies if available -->
+    {% if top_words %}
+        <h2>Top Words and Frequencies</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Word</th>
+                    <th>Frequency</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for word, freq in top_words %}
+                    <tr>
+                        <td>{{ word }}</td>
+                        <td>{{ freq }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Display the pie chart -->
+        <div class="graph-container">
+            <h2>Word Frequency Distribution</h2>
+            <div>
+                {{ graph_html|safe }}
+            </div>
+        </div>
+    {% endif %}
+</body>
+</html>

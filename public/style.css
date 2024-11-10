@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label,
+input,
+button {
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+}
